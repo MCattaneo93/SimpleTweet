@@ -56,6 +56,14 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setAdapter(adapter);
         populateHomeTimeline();
 
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("TwitterClient", "Content has been refreshed");
+                populateHomeTimeline();
+            }
+        });
+
     }
     private void populateHomeTimeline() {
         client.getHomeTimeline(new JsonHttpResponseHandler(){
